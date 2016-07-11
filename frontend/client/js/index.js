@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Toggle from './components/toggle.js';
+import { Provider } from 'react-redux';
+
+import Reaggle from './components/Reaggle.js';
+import { store } from './store.js';
 
 import '../sass/main.scss';
 
 const root = document.querySelector('.container');
 
 ReactDOM.render(
+  <Provider store={store}>
     <Reaggle
-        apiRoot="https://reaggle.herokuapp.com/api/entries/"
-        interval="2000" />,
-    root
+      apiRoot="https://reaggle.herokuapp.com/api/entries/"
+      interval="2000"
+    />
+  </Provider>,
+  root
 );

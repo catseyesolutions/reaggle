@@ -1,4 +1,6 @@
 import { createStore } from 'redux';
 import reaggleApp from './reducers/index.js';
 
-let store = createStore(reaggleApp);
+const store = createStore(reaggleApp);
+
+export default store;
