@@ -6,26 +6,50 @@ class ReaggleForm extends React.Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.tick = this.tick.bind(this);
   }
 
   handleClick() {
     if (this.props.fromDate) {
-      this.props.onStop(Date.now());
+      this.props.onStop(Date.now(), this.props);
+      clearInterval(this.timer);
     } else {
       this.props.onStart(Date.now());
+      this.timer = setInterval(this.tick, 1000);
     }
   }
 
+  tick() {
+    this.props.onTick(Date.now());
+  }
+
   render() {
+    let seconds = this.props.elapsed / 1000;
     return (
       <div className="reaggle-form">
-        <input type="text" placeholder="insert project" value={this.props.project} />
-        <input type="text" placeholder="insert description" value={this.props.description} />
-        <input type="checkbox" checked={this.props.billable} />
+        <input
+          type="text"
+          placeholder="insert project"
+          value={this.props.project}
+          onChange={this.props.onProjectChange}
+        />
+        <input
+          type="text"
+          placeholder="insert description"
+          value={this.props.description}
+          onChange={this.props.onDescriptionChange}
+        />
+        <input
+          type="checkbox"
+          checked={this.props.billable}
+          onChange={this.props.onBillableChange}
+        />
         <div className="reaggle-form-duration">
-          <p>00:00</p>
+          <p>{seconds}</p>
         </div>
-        <button onClick={this.handleClick}>Start</button>
+        <button onClick={this.handleClick}>
+          {this.props.fromDate ? 'Stop' : 'Start'}
+        </button>
       </div>
     );
   }
@@ -35,9 +59,14 @@ ReaggleForm.propTypes = {
   project: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   billable: PropTypes.bool.isRequired,
-  fromDate: PropTypes.string,
+  fromDate: PropTypes.number,
+  elapsed: PropTypes.number,
   onStart: PropTypes.func.isRequired,
   onStop: PropTypes.func.isRequired,
+  onTick: PropTypes.func.isRequired,
+  onProjectChange: PropTypes.func.isRequired,
+  onDescriptionChange: PropTypes.func.isRequired,
+  onBillableChange: PropTypes.func.isRequired,
 };
 
 export default ReaggleForm;

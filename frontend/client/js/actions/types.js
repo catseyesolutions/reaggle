@@ -4,7 +4,20 @@
  */
 
 /** The timer should start tracking */
-export const START_TIMER = 'START_TIMER';
+const START_TIMER = 'START_TIMER';
 
 /** The timer should stop tracking */
-export const STOP_TIMER = 'STOP_TIMER';
+const STOP_TIMER = 'STOP_TIMER';
+
+/** Update the elapsed time of the timer */
+const TICK_TIMER = 'TICK_TIMER';
+
+/** Update the form of the timer */
+const UPDATE_TIMER_FORM = 'UPDATE_TIMER_FORM';
+
+export default {
+  START_TIMER,
+  STOP_TIMER,
+  TICK_TIMER,
+  UPDATE_TIMER_FORM,
+};

@@ -1,11 +1,11 @@
 import React from 'react';
-import ReaggleList from './ReaggleList.js';
 import ContainerForm from './ContainerForm.js';
+import ContainerList from './ContainerList.js';
 
 const Reaggle = () => (
   <div className="entries-list">
     <ContainerForm />
-    <ReaggleList />
+    <ContainerList />
   </div>
 );
 

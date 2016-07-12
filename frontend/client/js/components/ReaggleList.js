@@ -7,7 +7,7 @@ const ReaggleList = ({ entries, onResume }) => (
       <ReaggleEntry
         key={entry.id}
         {...entry}
-        onResume={() => onResume(entry.id)}
+        onResume={onResume}
       />
     )}
   </div>
