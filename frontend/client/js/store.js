@@ -1,6 +1,15 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 import reaggleApp from './reducers/index.js';
 
-const store = createStore(reaggleApp);
+const loggerMiddleware = createLogger();
+const store = createStore(
+  reaggleApp,
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  )
+);
 
 export default store;

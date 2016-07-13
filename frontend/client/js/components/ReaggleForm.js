@@ -6,21 +6,14 @@ class ReaggleForm extends React.Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
-    this.tick = this.tick.bind(this);
   }
 
   handleClick() {
     if (this.props.fromDate) {
       this.props.onStop(Date.now(), this.props);
-      clearInterval(this.timer);
     } else {
       this.props.onStart(Date.now());
-      this.timer = setInterval(this.tick, 1000);
     }
-  }
-
-  tick() {
-    this.props.onTick(Date.now());
   }
 
   render() {
@@ -63,7 +56,6 @@ ReaggleForm.propTypes = {
   elapsed: PropTypes.number,
   onStart: PropTypes.func.isRequired,
   onStop: PropTypes.func.isRequired,
-  onTick: PropTypes.func.isRequired,
   onProjectChange: PropTypes.func.isRequired,
   onDescriptionChange: PropTypes.func.isRequired,
   onBillableChange: PropTypes.func.isRequired,

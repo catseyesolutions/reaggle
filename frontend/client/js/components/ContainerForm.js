@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { startTimer, stopTimer, updateTimerForm, tickTimer } from '../actions/creators.js';
+import { startTimer, stopTimer, updateTimerForm } from '../actions/creators.js';
 
 import ReaggleForm from './ReaggleForm.js';
 
@@ -14,9 +14,6 @@ const mapDispatchToProps = (dispatch) => ({
   onStop: (toDate, newEntry) => {
     const newId = Date.now();
     dispatch(stopTimer(toDate, newId, newEntry));
-  },
-  onTick: (date) => {
-    dispatch(tickTimer(date));
   },
   onProjectChange: (e) => {
     dispatch(updateTimerForm({ project: e.target.value }));
