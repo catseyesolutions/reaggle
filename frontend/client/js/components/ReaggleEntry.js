@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { PropTypes } from 'react';
 
 class ReaggleEntry extends React.Component {
@@ -13,11 +14,15 @@ class ReaggleEntry extends React.Component {
       description: this.props.description,
       billable: this.props.billable,
     };
-    this.props.onResume(Date.now(), newEntry);
+    this.props.onResume(moment().toISOString(), newEntry);
   }
 
   render() {
-    const elapsed = (this.props.toDate - this.props.fromDate) / 1000;
+    const { toDate, fromDate } = this.props;
+    const duration = moment.duration(moment(toDate).diff(moment(fromDate)));
+    const elapsedTime = Math.floor(duration.asHours()) +
+        moment.utc(duration.asMilliseconds()).format(':mm:ss');
+
     return (
       <div className="reaggle-entry">
         <div className="reaggle-entry-project">
@@ -30,7 +35,7 @@ class ReaggleEntry extends React.Component {
           {this.props.billable ? '$' : ''}
         </div>
         <div className="reaggle-entry-duration">
-          <p>{elapsed}</p>
+          <p>{elapsedTime}</p>
         </div>
         <div className="reaggle-entry-resume">
           <button onClick={this.handleClick}>Resume</button>
@@ -44,8 +49,8 @@ ReaggleEntry.propTypes = {
   project: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   billable: PropTypes.bool.isRequired,
-  fromDate: PropTypes.number.isRequired,
-  toDate: PropTypes.number.isRequired,
+  fromDate: PropTypes.string.isRequired,
+  toDate: PropTypes.string.isRequired,
   onResume: PropTypes.func.isRequired,
 };
 

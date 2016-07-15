@@ -1,14 +1,15 @@
+import moment from 'moment';
 import { combineReducers } from 'redux';
 import ActionTypes from '../actions/types.js';
 
 /**
   {
-  timer: {
-  },
-  entries: [
-  ]
+    timer: {
+    },
+    entries: [
+    ]
   }
-  */
+ */
 
 const initialTimerState = {
   project: '',
@@ -39,7 +40,7 @@ const timer = (state = initialTimerState, action) => {
 
     case ActionTypes.TICK_TIMER:
       return Object.assign({}, state, {
-        elapsed: action.date - state.fromDate,
+        elapsed: action.now - moment(state.fromDate).valueOf(),
       });
 
     default:
@@ -60,6 +61,8 @@ const entries = (state = [], action) => {
         }),
         ...state,
       ];
+    case ActionTypes.RECEIVE_ENTRIES:
+      return action.entries;
     default:
       return state;
   }

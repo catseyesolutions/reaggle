@@ -12,6 +12,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(startTimer(fromDate));
   },
   onStop: (toDate, newEntry) => {
+    // attach a new id to the entry
     const newId = Date.now();
     dispatch(stopTimer(toDate, newId, newEntry));
   },

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { PropTypes } from 'react';
 
 
@@ -9,10 +10,11 @@ class ReaggleForm extends React.Component {
   }
 
   handleClick() {
+    const current = moment().toISOString();
     if (this.props.fromDate) {
-      this.props.onStop(Date.now(), this.props);
+      this.props.onStop(current, this.props);
     } else {
-      this.props.onStart(Date.now());
+      this.props.onStart(current);
     }
   }
 
@@ -52,7 +54,7 @@ ReaggleForm.propTypes = {
   project: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   billable: PropTypes.bool.isRequired,
-  fromDate: PropTypes.number,
+  fromDate: PropTypes.string,
   elapsed: PropTypes.number,
   onStart: PropTypes.func.isRequired,
   onStop: PropTypes.func.isRequired,
